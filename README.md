@@ -13,4 +13,9 @@ Hardware Requirements for this document:
 
 Zabbix can run on less hardware resources.  See the documentation. 
 
- - 
+---
+
+ 1. Install Rocky Linux 8.6 
+    - At installation time
+      - Create zabbix user
+    
