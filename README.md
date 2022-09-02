@@ -15,7 +15,15 @@ Zabbix can run on less hardware resources.  See the documentation.
 
 ---
 
- 1. Install Rocky Linux 8.6 
-    - At installation time
+ 1. Install LAMP on Rocky Linux 8.6
+    - Install Apache
+      'sudo dnf install @httpd'
+    - Enable Apache and run it at startup. 
+      'sudo systemctl enable --now httpd'
+    - Check that apache is running
+      'sudo systemctl status httpd'
+      
+    
       - Create zabbix user
     
+   
