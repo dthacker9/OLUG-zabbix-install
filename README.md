@@ -14,7 +14,7 @@ Hardware Requirements for this document:
 Zabbix can run on less hardware resources.  See the documentation. 
 These instruction are assuming you are logged in as root.  --
 
-#These instructions are intended for using Zabbix in a home lab. You may want to make your server more secure than this.
+# These instructions are intended for using Zabbix in a home lab. You may want to make your server more secure than this.
 
 ---
  1. Install LAMP on Rocky Linux 8.6
@@ -55,7 +55,7 @@ public (active)
      ```
      [mariadb]
      name = MariaDB
-     baseurl = http:///rhel8-amd64
+     baseurl = http://yum.mariadb.org/10.6/rhel8-amd64
      gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
      gpgcheck=1
      module_hotfixes=1
