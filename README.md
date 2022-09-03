@@ -3,8 +3,9 @@
 This is instructions for installing the [Zabbix](https://www.zabbix.com) on Rocky Linux.  
 The current versions used in this document are:
  - Operating System:  Rocky Linux 8.6
- - Zabbix 	   :  6.0 LTS
+ - Zabbix 	   :  6.2 LTS
  - MariaDB         :  10.6
+ - PHP:       : 7.4
 
 Hardware Requirements for this document:
  - CPU: 8 Core
@@ -29,8 +30,8 @@ These instruction are assuming you are logged in as root.  --
     ```
     firewall-cmd --zone=public --add-service=http  --permanent
     firewall-cmd --zone=public --add-service=https --permanent
-    # firewall-cmd --reload
-    # firewall-cmd --list-all
+    firewall-cmd --reload
+    firewall-cmd --list-all
 public (active)
   target: default
   icmp-block-inversion: no
@@ -64,48 +65,45 @@ public (active)
      ```
      dnf install MariaDB-server MariaDB-client MariaDB-backup
      ```
- 4. Install PHP
-
-
-
-
-
-
-
-
-
-
-
-
-
-1. Install the Zabbix Repostory
+   - Start up MariaDB server and check status
+     ```
+     systemctl enable --now mariadb
+     systemctl status mariadb
+     ```
+   - Run the mariadb secure installation script (Save the MariaDB root password in a safe place)
+     ```  
+     /usr/bin/mariadb-secure-installation
+     ```
+   - Check root login
+     ```
+     mysql -u root -p
+     ```
+ 4. Install PHP 
+    - Install PHP with a minumum version of 7.4 along with other needed utilities
+      ```
+       dnf module install php:7.4
+       dnf install php php-curl php-fpm php-mysqlnd
+      ```
+    - Enable the php-fm service with auto-start and verify status
+      ```
+      systemctl enable --now php-fpm
+      systemctl status php-fpm
+      ````
+5. Install the Zabbix server and front End
+   - Add the Zabbix repository
+     ```
+     rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/8/x86_64/zabbix-release-6.2-1.el8.noarch.rpm
+     dnf clean all
+     ```
+   - Switch PHP version (redundant?)
+     ```
+     dnf module switch-to php:7.4
+     ```
+   - Install the Zabbix server, front end, and setup scripts
+     ```
+     dnf install zabbix-server-mysql zabbix-web-mysql zabbix-apache-conf zabbix-sql-scripts zabbix-selinux-policy zabbix-agent
+     
 ```
-# rpm -Uvh https://repo.zabbix.com/zabbix/6.2/rhel/8/x86_64/zabbix-release-6.2-1.el8.noarch.rpm
-# dnf clean all
-```
-2. Switch DNF module version for PHP
-```
-# dnf module switch-to php:7.4
-```
-3. Install the Zabbix server, frontend, agent
-```
-# dnf install zabbix-server-mysql zabbix-web-mysql zabbix-apache-conf zabbix-sql-scripts zabbix-selinux-policy zabbix-agent
-```
-1. Install LAMP on Rocky Linux 8.6
-    - Install Apache
-    ```
-    sudo dnf install @httpd
-    ```  ```
-    
-    - Enable Apache and run it at startup. 
-    ```
-    sudo systemctl enable --now httpd
-    ```
-    
-    - Check that apache is running
-    ```
-    sudo systemctl status httpd
-    ```
 
     
    
