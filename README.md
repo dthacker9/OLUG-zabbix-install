@@ -12,13 +12,9 @@ Hardware Requirements for this document:
  - Disk Space : 500GB
 
 Zabbix can run on less hardware resources.  See the documentation. 
+These instruction are assuming you are logged in as root.  --
 
-These instructions are intended for using Zabbix in a home lab. You may want to make your server more secure than this.
-
----
-Test try one
-1. Apache
-2. Maria DB
+#These instructions are intended for using Zabbix in a home lab. You may want to make your server more secure than this.
 
 ---
  1. Install LAMP on Rocky Linux 8.6
@@ -31,18 +27,8 @@ Test try one
  2. Open the firewall to allow web traffic
     - Add http, https to allowed services and reload
     ```
-    
-    sudo systemctl status httpd
-    ```
-    ```
-    - Enable Apache and run it at startup. 
-    ```
-     - Enable Apache and run it at startup. 
-    ```
-    sudo systemctl enable --now httpd
-    ```
-    # firewall-cmd --zone=public --add-service=http  --permanent
-    # firewall-cmd --zone=public --add-service=https --permanent
+    firewall-cmd --zone=public --add-service=http  --permanent
+    firewall-cmd --zone=public --add-service=https --permanent
     # firewall-cmd --reload
     # firewall-cmd --list-all
 public (active)
@@ -60,17 +46,36 @@ public (active)
   icmp-blocks:
   rich rules:
 
-    
-    - Check that apache is running
+3. Install MariaDB
+   - Create the MariaDB repo file 
     ```
-    sudo systemctl status httpd
+    vi /etc/yum.repos.d/mariadb.repo
     ```
-    ```
-    
-    - Check that apache is running
-    ```
-    sudo systemctl status httpd
-    ```
+   - put this lines into mariadb.repo
+     ```
+     [mariadb]
+     name = MariaDB
+     baseurl = http:///rhel8-amd64
+     gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+     gpgcheck=1
+     module_hotfixes=1
+     ```
+   - install MariaDB server and friends
+     ```
+     dnf install MariaDB-server MariaDB-client MariaDB-backup
+     ```
+ 4. Install PHP
+
+
+
+
+
+
+
+
+
+
+
 
 
 1. Install the Zabbix Repostory
