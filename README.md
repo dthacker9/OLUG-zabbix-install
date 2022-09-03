@@ -13,6 +13,8 @@ Hardware Requirements for this document:
 
 Zabbix can run on less hardware resources.  See the documentation. 
 
+These instructions are intended for using Zabbix in a home lab. You may want to make your server more secure than this.
+
 ---
 Test try one
 1. Apache
@@ -26,9 +28,10 @@ Test try one
     sudo systemctl enable --now httpd
     sudo systemctl status httpd
     ```
-    
-    - Check that apache is running
+ 2. Open the firewall to allow web traffic
+    - Add http, https to allowed services and reload
     ```
+    
     sudo systemctl status httpd
     ```
     ```
@@ -38,6 +41,25 @@ Test try one
     ```
     sudo systemctl enable --now httpd
     ```
+    # firewall-cmd --zone=public --add-service=http  --permanent
+    # firewall-cmd --zone=public --add-service=https --permanent
+    # firewall-cmd --reload
+    # firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens18
+  sources:
+  services: cockpit dhcpv6-client http https ssh
+  ports:
+  protocols:
+  forward: no
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+
     
     - Check that apache is running
     ```
