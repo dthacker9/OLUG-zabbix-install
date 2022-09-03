@@ -102,6 +102,10 @@ public (active)
    - Install the Zabbix server, front end, and setup scripts
      ```
      dnf install zabbix-server-mysql zabbix-web-mysql zabbix-apache-conf zabbix-sql-scripts zabbix-selinux-policy zabbix-agent
+     ```
+6. Create the Zabbix database 
+   - 
+   
      
 ```
 
