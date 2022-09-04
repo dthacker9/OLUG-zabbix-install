@@ -103,8 +103,49 @@ public (active)
      ```
      dnf install zabbix-server-mysql zabbix-web-mysql zabbix-apache-conf zabbix-sql-scripts zabbix-selinux-policy zabbix-agent
      ```
-6. Create the Zabbix database 
-   - 
+6. Create and configure Zabbix databas.
+   - Create the database and zabbix database user:
+   ```
+   mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.6.9-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database zabbix character set utf8mb4 collate utf8mb4_bin;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> create user zabbix@localhost identified by 'yourpassword';
+Query OK, 0 rows affected (0.093 sec)
+
+MariaDB [(none)]>grant all privileges on zabbix.* to zabbix@localhost;
+Query OK, 0 rows affected (0.077 sec)
+
+MariaDB [(none)]> set global log_bin_trust_function_creators = 1;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> quit;
+```
+- Import the initial schema and data. You will be prompted for your newly created Zabbix database password.
+
+
+
+
+
+
+
+AT end
+
+Open port 10050
+
+  ```
+  
+
+
    
      
 ```
