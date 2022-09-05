@@ -133,16 +133,29 @@ Query OK, 0 rows affected (0.001 sec)
 MariaDB [(none)]> quit;
 ```
 - Import the initial schema and data. You will be prompted for your newly created Zabbix database password.
+  ``` zcat /usr/share/doc/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
+  ```
+  time passes...
+- Disable log_bin_trust_function_creator after importing the database schema.
+  ```
+  # mysql -uroot -p
+  password
+  mysql> set global log_bin_trust_function_creators = 0;
+  mysql> quit;
+- Configure the zabbix database password in the server
+  ```
+  vi /etc/zabbix/zabbix_server.conf
+   
+  DBPassword=password
+  ```
+- Restart the Zabbix Server and Agent
+  ```
+  # systemctl restart zabbix-server zabbix-agent httpd php-fpm
+  # systemctl enable zabbix-server zabbix-agent httpd php-fpm
+  ```
+  Browse to http://your-name-or-ip-here/zabbix
+  
 
-
-
-
-
-
-
-AT end
-
-Open port 10050
 
   ```
   
