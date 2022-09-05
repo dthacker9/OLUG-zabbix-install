@@ -155,15 +155,16 @@ MariaDB [(none)]> quit;
   ```
   Browse to http://your-name-or-ip-here/zabbix
   
+7. Perform intial Setup (You're nearly there....)
+8. Set your language and press "Next Step"
+9. Check all prerequisites.  If they all are "OK" then press "Next step"
+10. Configure DB Connection: take all the defaults fill in your Zabbix database password.  "Next step"
+11. Settings: Set your server name. This is the name that you will point all the host's agents to.  Set your time zone. 
+12. Verify the summary is correct.  Next Step
+13. Congratulations!! You did it!  Enjoy the beverage of your choice!
+14.The inital login is User: Admin  Password: zabbix.   You need to change that now!
+15. Go forth and monitor!
 
+Patches welcome.
+dthacker9@gmail.com
 
-  ```
-  
-
-
-   
-     
-```
-
-    
-   
