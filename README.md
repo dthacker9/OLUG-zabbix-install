@@ -30,6 +30,8 @@ These instruction are assuming you are logged in as root.  --
     ```
     firewall-cmd --zone=public --add-service=http  --permanent
     firewall-cmd --zone=public --add-service=https --permanent
+    firewall-cmd --zone=public --add-port=10050/tcp --permanent
+    firewall-cmd --zone=publix --add-port=10051/tcp --permanent
     firewall-cmd --reload
     firewall-cmd --list-all
 public (active)
